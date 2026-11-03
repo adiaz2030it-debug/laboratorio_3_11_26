@@ -33,12 +33,22 @@ Completa ejercicio 3: reservas y liberaciones
 
 def reservar_puesto(puestos, coordenada):
     # TODO: implementa esta funcion.
-    pass
+    fila, columna = coordenada
+    if 0 <= fila < len(puestos) and 0 <= columna < len(puestos[fila]):
+        if puestos[fila][columna] == 0:
+            puestos[fila][columna] = 1
+            return True
+    return False
 
 
 def liberar_puesto(puestos, coordenada):
     # TODO: implementa esta funcion.
-    pass
+    fila, columna = coordenada
+    if 0 <= fila < len(puestos) and 0 <= columna < len(puestos[fila]):
+        if puestos[fila][columna] == 1:
+            puestos[fila][columna] = 0
+            return True
+    return False
 
 
 if __name__ == "__main__":
@@ -46,6 +56,13 @@ if __name__ == "__main__":
 
     # TODO: escribe las llamadas y muestra los resultados con print.
     # TODO: agrega al menos un caso propio.
-
-# ANALISIS
+print(reservar_puesto(puestos, (0, 1))) 
+print(reservar_puesto(puestos, (0, 1)))  
+print(liberar_puesto(puestos, (1, 2)))  
+print(liberar_puesto(puestos, (1, 2))) 
+print(reservar_puesto(puestos, (5, 0)))  
+print(reservar_puesto(puestos, (-1, 0)))  
 # TODO: responde aqui las preguntas del enunciado.
+
+"""No, no es necesario recorrer todo el tablero porque se puede acceder y modificar directamente la coordenada conocida. 
+Por ello, la operación de reserva tiene una complejidad de tiempo constante $O(1)$, ya que no requiere bucles ni búsquedas. """
