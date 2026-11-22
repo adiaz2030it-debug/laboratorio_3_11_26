@@ -34,13 +34,23 @@ Completa ejercicio 6: resumen de multiples laboratorios
 """
 
 def resumir_laboratorios(laboratorios):
-    # TODO: implementa esta funcion.
-    pass
+    resumen = {}
+    for nombre, matriz in laboratorios.items():
+        total = sum(len(fila) for fila in matriz)
+        ocupados = sum(sum(fila) for fila in matriz)
+        disponibles = total - ocupados
+        resumen[nombre] = (total, ocupados, disponibles)
+    return resumen
 
 
 def laboratorios_con_cupo(resumen, cantidad):
-    # TODO: implementa esta funcion.
-    pass
+    if cantidad <= 0:
+        return set()
+    return {
+        nombre
+        for nombre, (_, _, disponibles) in resumen.items()
+        if disponibles >= cantidad
+    }
 
 
 if __name__ == "__main__":
@@ -50,8 +60,24 @@ if __name__ == "__main__":
         "C": [[0, 0, 0]]
     }
 
-    # TODO: escribe las llamadas y muestra los resultados con print.
-    # TODO: agrega al menos un caso propio.
+    resumen = resumir_laboratorios(laboratorios)
+    print("Resumen:", resumen)
 
-# ANALISIS
-# TODO: responde aqui las preguntas del enunciado.
+
+    print("Cupo >= 3:", laboratorios_con_cupo(resumen, 3))  
+    print("Cupo >= 4:", laboratorios_con_cupo(resumen, 4))  
+    print("Cupo >= 5:", laboratorios_con_cupo(resumen, 5)) 
+    print("Cupo >= 0:", laboratorios_con_cupo(resumen, 0))  
+
+    # Caso propio
+    laboratorios_ampliados = {
+        **laboratorios,
+        "D": [[0, 1, 0, 0], [0, 0, 1, 0]]
+    }
+    resumen_ampliado = resumir_laboratorios(laboratorios_ampliados)
+    print("\nResumen ampliado:", resumen_ampliado)
+    
+    print("Cupo >= 3 (ampliado):", laboratorios_con_cupo(resumen_ampliado, 3))  
+    print("Cupo >= 4 (ampliado):", laboratorios_con_cupo(resumen_ampliado, 4)) 
+    print("Cupo >= 5 (ampliado):", laboratorios_con_cupo(resumen_ampliado, 5))
+    print("Cupo >= 0 (ampliado):", laboratorios_con_cupo(resumen_ampliado, 0)) 

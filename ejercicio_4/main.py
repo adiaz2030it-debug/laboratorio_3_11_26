@@ -27,20 +27,32 @@ Completa ejercicio 4: reportes y transformacion de estados
 """
 
 def resumir_filas(puestos):
-    # TODO: implementa esta funcion.
-    pass
+    resultado = []
+    for numero_fila, fila in enumerate(puestos):
+        ocupados = sum(fila)
+        disponibles = len(fila) - ocupados
+        resultado.append((numero_fila, ocupados, disponibles))
+    return resultado
 
 
 def transformar_estados(puestos, transformar):
-    # TODO: implementa esta funcion.
-    pass
+    return [
+        [transformar(estado) for estado in fila]
+        for fila in puestos
+    ]
 
 
 if __name__ == "__main__":
     puestos = [[1, 0, 1, 0], [0, 0, 1, 0], [1, 1, 1, 0]]
 
-    # TODO: escribe las llamadas y muestra los resultados con print.
-    # TODO: agrega al menos un caso propio.
+    print("Resumen:", resumir_filas(puestos))
+   
 
-# ANALISIS
-# TODO: responde aqui las preguntas del enunciado.
+    tabla_textos = transformar_estados(
+        puestos,
+        lambda estado: "Disponible" if estado == 0 else "Ocupado"
+    )
+    print("Tabla de textos:", tabla_textos)
+    print("Tablero original:", puestos)
+
+

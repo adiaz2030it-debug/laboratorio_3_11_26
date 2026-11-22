@@ -34,15 +34,56 @@ Completa ejercicio 5: reserva de grupos sin cambios parciales
 """
 
 def reservar_grupo(puestos, coordenadas):
-    # TODO: implementa esta funcion.
-    pass
+    if not coordenadas:
+        return False
+
+    if len(set(coordenadas)) != len(coordenadas):
+        return False
+
+    filas = len(puestos)
+    columnas = len(puestos[0])
+
+    for fila, columna in coordenadas:
+        if not (0 <= fila < filas and 0 <= columna < columnas):
+            return False
+        if puestos[fila][columna] != 0:
+            return False
+
+    for fila, columna in coordenadas:
+        puestos[fila][columna] = 1
+
+    return True
 
 
 if __name__ == "__main__":
     puestos = [[1, 0, 0], [0, 1, 0]]
 
-    # TODO: escribe las llamadas y muestra los resultados con print.
-    # TODO: agrega al menos un caso propio.
 
-# ANALISIS
-# TODO: responde aqui las preguntas del enunciado.
+    tablero_1 = [fila[:] for fila in puestos]
+    print("Caso 1:", reservar_grupo(tablero_1, [(0, 1), (1, 0)]), tablero_1)
+
+    tablero_2 = [fila[:] for fila in puestos]
+    print("Caso 2:", reservar_grupo(tablero_2, [(0, 1), (0, 1)]), tablero_2)
+
+
+
+    tablero_3 = [fila[:] for fila in puestos]
+    print("Caso 3:", reservar_grupo(tablero_3, [(0, 1), (0, 0)]), tablero_3)
+
+
+    tablero_4 = [fila[:] for fila in puestos]
+    print("Caso 4:", reservar_grupo(tablero_4, [(0, 1), (8, 0)]), tablero_4)
+
+
+   
+    tablero_5 = [fila[:] for fila in puestos]
+    print("Caso 5:", reservar_grupo(tablero_5, []), tablero_5)
+
+
+    # Caso propio
+    tablero_6 = [fila[:] for fila in puestos]
+    print("Caso propio (negativo):", reservar_grupo(tablero_6, [(0, 1), (-1, 2)]), tablero_6)
+
+
+    tablero_7 = [fila[:] for fila in puestos]
+    print("Caso propio (3 puestos):", reservar_grupo(tablero_7, [(0, 1), (0, 2), (1, 2)]), tablero_7)

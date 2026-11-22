@@ -27,30 +27,32 @@ Completa ejercicio 1: mapa y puestos disponibles
 """
 
 def crear_mapa(puestos):
-    # TODO: implementa esta funcion.
-    return {(fila, columna): puestos[fila][columna] for fila in range(len(puestos)) for columna in range(len(puestos[fila]))}
+    return {
+        (fila, columna): estado
+        for fila, fila_puestos in enumerate(puestos)
+        for columna, estado in enumerate(fila_puestos)
+    }
 
 
 def obtener_disponibles(puestos):
-    # TODO: implementa esta funcion.
-    return {(fila, columna) for fila in range(len(puestos)) for columna in range(len(puestos[fila])) if puestos[fila][columna] == 0}
+    return {
+        (fila, columna)
+        for fila, fila_puestos in enumerate(puestos)
+        for columna, estado in enumerate(fila_puestos)
+        if estado == 0
+    }
 
 
 if __name__ == "__main__":
     puestos = [[1, 0, 1], [0, 0, 1]]
-    libros = [[1, 1, 1, 0], [0, 9, 0, 0]]
-    print(crear_mapa(puestos))
-    print(obtener_disponibles(puestos))
-    print(crear_mapa(libros))
-    print(obtener_disponibles(libros))
+    mapa = crear_mapa(puestos)
+    print("Mapa completo:", mapa)
+    print("Estado en (1, 2):", mapa[(1, 2)])  
+    print("Disponibles:", obtener_disponibles(puestos))  
+    
+    # Caso propio 
+    libros = [[1, 1, 1, 0], [0, 1, 0, 0]]
+    mapa_libros = crear_mapa(libros)
+    print("Mapa libros:", mapa_libros)
+    print("Disponibles libros:", obtener_disponibles(libros)) 
 
-    # TODO: escribe las llamadas y muestra los resultados con print.
-    # TODO: agrega al menos un caso propio.
-
-# ANALISIS
-# TODO: responde aqui las preguntas del enunciado.
-
-"""
-se revisan 6 celdas
-se revisan f*c celdas para f filas y c columnas
-"""
